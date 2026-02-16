@@ -1,0 +1,70 @@
+<div class="moshaf-container">
+  <div class="header">
+    <p-button
+      label="السابق"
+      icon="pi pi-chevron-right"
+      (onClick)="previousPage()"
+      [disabled]="pageNumber() === 1 || isLoading()"
+      severity="secondary"
+    />
+    <h2>صفحة {{ pageNumber() }}</h2>
+    <p-button
+      label="التالي"
+      icon="pi pi-chevron-left"
+      iconPos="left"
+      (onClick)="nextPage()"
+      [disabled]="isLoading()"
+      severity="secondary"
+    />
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading">جاري التحميل...</div>
+  } @else {
+    <div class="ayahs-container">
+     
+        <div class="navigation-controls">
+          <p-button label="الصفحة السابقة" icon="pi pi-chevron-right" (onClick)="previousPage()"
+            [disabled]="pageNumber() === 1 || isLoading()" severity="secondary" />
+          <p-button label="الصفحة التالية" icon="pi pi-chevron-left" iconPos="left" (onClick)="nextPage()" [disabled]="isLoading()"
+            severity="secondary" />
+          <p-button label="الاي السابقة" icon="pi pi-chevron-right" (onClick)="revealPreviousAyah()" severity="secondary" />
+          <p-button label="الآية التالية" icon="pi pi-eye" (onClick)="revealNextAyah()" severity="secondary" />
+        
+        </div>
+
+        <div class="page-content">
+          @for (ayah of ayahs(); track ayah.number; let i = $index; let isFirst = $first) {
+            @if (isFirst) {
+              <div class="surah-header">
+                <span class="surah-name"> {{ ayah.surah.name }}</span>
+              </div>
+            }
+            @if (!isFirst && ayah.surah.number !== ayahs()[i - 1].surah.number) {
+              <div class="surah-header">
+                <span class="surah-name"> {{ ayah.surah.name }}</span>
+              </div>
+            }
+
+            @if (displayMode() === 'ayah') {
+              <span class="ayah-text" [class.hidden]="!isAyahRevealed(i)">
+                {{ ayah.text }}<span class="ayah-number">{{ ayah.numberInSurah }}</span>
+              </span>
+            } @else {
+              <span class="ayah-text">
+                @for (word of ayah.words; track word.position; let wIndex = $index) {
+                  @if (i < currentAyahIndex() || (i === currentAyahIndex() && wIndex <= currentWordIndex())) {
+                    <span class="word-text revealed">{{ word.text }}</span>
+                  } @else {
+                    <span class="word-text hidden">{{ word.text }}</span>
+                  }
+                }
+                <span class="ayah-number">{{ ayah.numberInSurah }}</span>
+              </span>
+            }
+          }
+        </div>
+    </div>
+  }
+
+</div>
