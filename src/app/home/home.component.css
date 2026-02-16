@@ -45,6 +45,7 @@
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
+  gap: 1rem;
 }
 
 .header h2 {
@@ -52,6 +53,16 @@
   font-size: 1.5rem;
   color: #333;
   font-family: 'Amiri', 'Traditional Arabic', Arial, sans-serif;
+}
+
+.page-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-input-container p-inputNumber {
+  min-width: 120px;
 }
 
 .controls {

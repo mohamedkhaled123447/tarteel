@@ -1,10 +1,12 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { QuranService } from '../services/quran.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [ButtonModule],
+  imports: [ButtonModule, InputNumberModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -13,6 +15,7 @@ export class HomeComponent implements OnInit {
   title = 'Welcome to Tarteel';
   ayahs = signal<any[]>([]);
   pageNumber = signal(1);
+  pageNumberInput = signal(1);
   isLoading = signal(false);
   displayMode = signal<'ayah' | 'word' | null>(null);
   currentAyahIndex = signal(0);
@@ -33,6 +36,7 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         this.ayahs.set(data.data.ayahs);
         this.pageNumber.set(pageNumber);
+        this.pageNumberInput.set(pageNumber);
         this.isLoading.set(false);
       },
       error: (error) => {
@@ -49,6 +53,13 @@ export class HomeComponent implements OnInit {
   previousPage(): void {
     if (this.pageNumber() > 1) {
       this.loadPage(this.pageNumber() - 1);
+    }
+  }
+
+  goToPage(): void {
+    const page = this.pageNumberInput();
+    if (page && page >= 1 && page <= 604) {
+      this.loadPage(page);
     }
   }
 

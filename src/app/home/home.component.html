@@ -7,7 +7,27 @@
       [disabled]="pageNumber() === 1 || isLoading()"
       severity="secondary"
     />
-    <h2>صفحة {{ pageNumber() }}</h2>
+    <div class="page-input-container">
+      <p-inputNumber
+        [(ngModel)]="pageNumberInput"
+        [min]="1"
+        [max]="604"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="page-number"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        (onKeyDown)="goToPage()"
+      />
+      <p-button
+        label="اذهب"
+        icon="pi pi-search"
+        (onClick)="goToPage()"
+        severity="success"
+      />
+    </div>
     <p-button
       label="التالي"
       icon="pi pi-chevron-left"
@@ -28,7 +48,7 @@
             [disabled]="pageNumber() === 1 || isLoading()" severity="secondary" />
           <p-button label="الصفحة التالية" icon="pi pi-chevron-left" iconPos="left" (onClick)="nextPage()" [disabled]="isLoading()"
             severity="secondary" />
-          <p-button label="الاي السابقة" icon="pi pi-chevron-right" (onClick)="revealPreviousAyah()" severity="secondary" />
+          <p-button label="الآية السابقة" icon="pi pi-chevron-right" (onClick)="revealPreviousAyah()" severity="secondary" />
           <p-button label="الآية التالية" icon="pi pi-eye" (onClick)="revealNextAyah()" severity="secondary" />
         
         </div>
