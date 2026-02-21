@@ -15,12 +15,18 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+           "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "public",
+                    "output": "/"
+                  },
+                  {
+                    "glob": "**/*",
+                    "input": "src/assets",
+                    "output": "/assets"
+                  }
+                ],
             "styles": [
               "src/styles.css"
             ]
