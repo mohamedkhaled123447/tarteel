@@ -1,90 +1,121 @@
 <div class="moshaf-container">
-  <div class="header">
-    <p-button
-      label="السابق"
-      icon="pi pi-chevron-right"
-      (onClick)="previousPage()"
-      [disabled]="pageNumber() === 1 || isLoading()"
-      severity="secondary"
-    />
-    <div class="page-input-container">
-      <p-inputNumber
-        [(ngModel)]="pageNumberInput"
-        [min]="1"
-        [max]="604"
-        [showButtons]="true"
-        buttonLayout="horizontal"
-        inputId="page-number"
-        spinnerMode="horizontal"
-        [step]="1"
-        decrementButtonClass="p-button-secondary"
-        incrementButtonClass="p-button-secondary"
-        (onKeyDown)="goToPage()"
-      />
+  <p-toolbar styleClass="mb-4 header">
+    <ng-template #start>
       <p-button
-        label="اذهب"
-        icon="pi pi-search"
-        (onClick)="goToPage()"
-        severity="success"
+        label="السابق"
+        icon="pi pi-chevron-right"
+        (onClick)="previousPage()"
+        [disabled]="pageNumber() === 1 || isLoading()"
+        severity="secondary"
       />
-    </div>
-    <p-button
-      label="التالي"
-      icon="pi pi-chevron-left"
-      iconPos="left"
-      (onClick)="nextPage()"
-      [disabled]="isLoading()"
-      severity="secondary"
-    />
-  </div>
+    </ng-template>
+
+    <ng-template #center>
+      <div class="page-input-container">
+        <p-inputNumber
+          [(ngModel)]="pageNumberInput"
+          [min]="1"
+          [max]="604"
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="page-number"
+          spinnerMode="horizontal"
+          [step]="1"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          (onKeyDown)="goToPage()"
+          styleClass="w-full"
+        />
+        <p-button
+          label="اذهب"
+          icon="pi pi-search"
+          (onClick)="goToPage()"
+          severity="success"
+        />
+      </div>
+    </ng-template>
+
+    <ng-template #end>
+      <p-button
+        label="التالي"
+        icon="pi pi-chevron-left"
+        iconPos="left"
+        (onClick)="nextPage()"
+        [disabled]="isLoading()"
+        severity="secondary"
+      />
+    </ng-template>
+  </p-toolbar>
 
   @if (isLoading()) {
     <div class="loading">جاري التحميل...</div>
   } @else {
-    <div class="ayahs-container">
-     
-        <div class="navigation-controls">
-          <p-button label="الصفحة السابقة" icon="pi pi-chevron-right" (onClick)="previousPage()"
-            [disabled]="pageNumber() === 1 || isLoading()" severity="secondary" />
-          <p-button label="الصفحة التالية" icon="pi pi-chevron-left" iconPos="left" (onClick)="nextPage()" [disabled]="isLoading()"
-            severity="secondary" />
-          <p-button label="الآية السابقة" icon="pi pi-chevron-right" (onClick)="revealPreviousAyah()" severity="secondary" />
-          <p-button label="الآية التالية" icon="pi pi-eye" (onClick)="revealNextAyah()" severity="secondary" />
-        
-        </div>
+    <p-card styleClass="ayahs-container">
+      <div class="navigation-controls">
+        <p-button 
+          label="السابقة" 
+          icon="pi pi-chevron-right" 
+          (onClick)="previousPage()"
+          [disabled]="pageNumber() === 1 || isLoading()" 
+          severity="secondary"
+          styleClass="w-full md:w-auto"
+        />
+        <p-button 
+          label="التالية" 
+          icon="pi pi-chevron-left" 
+          iconPos="left" 
+          (onClick)="nextPage()" 
+          [disabled]="isLoading()"
+          severity="secondary"
+          styleClass="w-full md:w-auto"
+        />
+        <p-button 
+          label="آية سابقة" 
+          icon="pi pi-chevron-right" 
+          (onClick)="revealPreviousAyah()" 
+          severity="secondary"
+          styleClass="w-full md:w-auto"
+        />
+        <p-button 
+          label="آية تالية" 
+          icon="pi pi-eye" 
+          (onClick)="revealNextAyah()" 
+          severity="secondary"
+          styleClass="w-full md:w-auto"
+        />
+      </div>
 
-        <div class="page-content">
-          @for (ayah of ayahs(); track ayah.number; let i = $index; let isFirst = $first) {
-            @if (isFirst) {
-              <div class="surah-header">
-                <span class="surah-name"> {{ ayah.surah.name }}</span>
-              </div>
-            }
-            @if (!isFirst && ayah.surah.number !== ayahs()[i - 1].surah.number) {
-              <div class="surah-header">
-                <span class="surah-name"> {{ ayah.surah.name }}</span>
-              </div>
-            }
-
-            @if (displayMode() === 'ayah') {
-              <span class="ayah-text" [class.hidden]="!isAyahRevealed(i)">
-                {{ ayah.text }}<span class="ayah-number">{{ ayah.numberInSurah }}</span>
-              </span>
-            } @else {
-              <span class="ayah-text">
-                @for (word of ayah.words; track word.position; let wIndex = $index) {
-                  @if (i < currentAyahIndex() || (i === currentAyahIndex() && wIndex <= currentWordIndex())) {
-                    <span class="word-text revealed">{{ word.text }}</span>
-                  } @else {
-                    <span class="word-text hidden">{{ word.text }}</span>
-                  }
-                }
-                <span class="ayah-number">{{ ayah.numberInSurah }}</span>
-              </span>
-            }
+      <div class="page-content">
+        @for (ayah of ayahs(); track ayah.number; let i = $index; let isFirst = $first) {
+          @if (isFirst) {
+            <div class="surah-header">
+              <span class="surah-name">{{ ayah.surah.name }}</span>
+            </div>
           }
-        </div>
-    </div>
-  }
+          @if (!isFirst && ayah.surah.number !== ayahs()[i - 1].surah.number) {
+            <div class="surah-header">
+              <span class="surah-name">{{ ayah.surah.name }}</span>
+            </div>
+          }
 
+          @if (displayMode() === 'ayah') {
+            <span class="ayah-text" [class.hidden]="!isAyahRevealed(i)">
+              {{ ayah.text }}<span class="ayah-number">{{ ayah.numberInSurah }}</span>
+            </span>
+          } @else {
+            <span class="ayah-text">
+              @for (word of ayah.words; track word.position; let wIndex = $index) {
+                @if (i < currentAyahIndex() || (i === currentAyahIndex() && wIndex <= currentWordIndex())) {
+                  <span class="word-text revealed">{{ word.text }}</span>
+                } @else {
+                  <span class="word-text hidden">{{ word.text }}</span>
+                }
+              }
+              <span class="ayah-number">{{ ayah.numberInSurah }}</span>
+            </span>
+          }
+        }
+      </div>
+    </p-card>
+  }
 </div>

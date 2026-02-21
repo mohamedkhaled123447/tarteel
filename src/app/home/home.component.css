@@ -46,6 +46,7 @@
   position: relative;
   z-index: 1;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .header h2 {
@@ -59,6 +60,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .page-input-container p-inputNumber {
@@ -112,6 +115,8 @@
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   min-width: 400px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .ayah-counter,
@@ -135,6 +140,7 @@
   z-index: 1;
   min-height: 400px;
   margin-bottom: 120px;
+  overflow-x: hidden;
 }
 
 .ayah-text {
@@ -142,6 +148,7 @@
   font-size: inherit;
   color: #1a1a1a;
   display: inline;
+  word-wrap: break-word;
 }
 
 .ayah-text.hidden {
@@ -238,4 +245,253 @@
   font-size: 1.2rem;
   color: #666;
   font-family: 'Amiri', 'Traditional Arabic', Arial, sans-serif;
+}
+
+.page-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Tablet Responsive Styles */
+@media (max-width: 768px) {
+  .moshaf-container {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border-width: 2px;
+  }
+
+  .moshaf-container::before {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border-width: 1px;
+  }
+
+  .moshaf-container::after {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .header .p-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-input-container {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .page-input-container p-inputNumber {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .ayahs-container {
+    padding: 1.5rem 1rem;
+    font-size: 1.4rem;
+    line-height: 2.2;
+    margin-bottom: 140px;
+    min-height: 300px;
+  }
+
+  .ayah-number {
+    font-size: 1.1rem;
+    min-width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+  }
+
+  .surah-name {
+    font-size: 1.3rem;
+  }
+
+  .navigation-controls {
+    position: fixed;
+    bottom: 10px;
+    min-width: calc(100% - 20px);
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .navigation-controls .p-button {
+    flex: 1;
+    min-width: calc(50% - 0.25rem);
+    font-size: 0.85rem;
+  }
+
+  .navigation-controls .p-button .p-button-label {
+    display: inline;
+  }
+
+  .ayah-text {
+    font-size: 1.4rem;
+  }
+
+  .word-text {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 480px) {
+  .moshaf-container {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border-width: 1px;
+    margin: 0.25rem;
+  }
+
+  .moshaf-container::before,
+  .moshaf-container::after {
+    display: none;
+  }
+
+  .header {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .page-input-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .page-input-container p-inputNumber {
+    width: 100%;
+  }
+
+  .page-input-container .p-button {
+    width: 100%;
+  }
+
+  .ayahs-container {
+    padding: 1rem 0.75rem;
+    font-size: 1.2rem;
+    line-height: 2;
+    margin-bottom: 160px;
+    min-height: 250px;
+    text-align: center;
+  }
+
+  .ayah-number {
+    font-size: 1rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin: 0 0.2rem;
+  }
+
+  .surah-header {
+    margin: 0.75rem 0;
+    padding: 0.4rem;
+  }
+
+  .surah-name {
+    font-size: 1.1rem;
+  }
+
+  .navigation-controls {
+    bottom: 5px;
+    min-width: calc(100% - 10px);
+    padding: 0.5rem;
+    border-radius: 6px;
+  }
+
+  .navigation-controls .p-button {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: calc(50% - 0.25rem);
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navigation-controls .p-button .p-button-icon {
+    font-size: 0.85rem;
+  }
+
+  .navigation-controls .p-button .p-button-label {
+    display: none;
+  }
+
+  .ayah-text {
+    font-size: 1.2rem;
+  }
+
+  .word-text {
+    font-size: 1.2rem;
+  }
+
+  .loading {
+    padding: 2rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* PrimeNG button responsive overrides */
+  .p-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .p-inputnumber {
+    width: 100%;
+  }
+
+  .p-inputnumber-input {
+    width: 100%;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 360px) {
+  .ayahs-container {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .ayah-text {
+    font-size: 1.1rem;
+  }
+
+  .word-text {
+    font-size: 1.1rem;
+  }
+
+  .navigation-controls .p-button {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: calc(50% - 0.25rem);
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .moshaf-container {
+    min-height: auto;
+  }
+
+  .ayahs-container {
+    min-height: 200px;
+    margin-bottom: 100px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+  }
+
+  .navigation-controls {
+    bottom: 5px;
+  }
 }

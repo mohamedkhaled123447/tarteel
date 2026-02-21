@@ -3,10 +3,12 @@ import { ButtonModule } from 'primeng/button';
 import { QuranService } from '../services/quran.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
+import { ToolbarModule } from 'primeng/toolbar';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-home',
-  imports: [ButtonModule, InputNumberModule, FormsModule],
+  imports: [ButtonModule, InputNumberModule, FormsModule, ToolbarModule, CardModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
