@@ -51,39 +51,20 @@
     <div class="loading">جاري التحميل...</div>
   } @else {
     <p-card styleClass="ayahs-container">
-      <div class="navigation-controls">
-        <p-button 
-          label="السابقة" 
-          icon="pi pi-chevron-right" 
-          (onClick)="previousPage()"
-          [disabled]="pageNumber() === 1 || isLoading()" 
-          severity="secondary"
-          styleClass="w-full md:w-auto"
-        />
-        <p-button 
-          label="التالية" 
-          icon="pi pi-chevron-left" 
-          iconPos="left" 
-          (onClick)="nextPage()" 
-          [disabled]="isLoading()"
-          severity="secondary"
-          styleClass="w-full md:w-auto"
-        />
-        <p-button 
-          label="آية سابقة" 
-          icon="pi pi-chevron-right" 
-          (onClick)="revealPreviousAyah()" 
-          severity="secondary"
-          styleClass="w-full md:w-auto"
-        />
-        <p-button 
-          label="آية تالية" 
-          icon="pi pi-eye" 
-          (onClick)="revealNextAyah()" 
-          severity="secondary"
-          styleClass="w-full md:w-auto"
-        />
-      </div>
+    <div
+     class="flex justify-between items-center px-4 py-2 bg-gray-100 rounded-lg mb-4 fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] shadow-lg w-[95%] md:min-w-[400px] md:w-auto flex-wrap gap-1">
+      <p-button label="السابقة" icon="pi pi-chevron-right" (onClick)="previousPage()"
+        [disabled]="pageNumber() === 1 || isLoading()" severity="secondary" styleClass="w-full md:w-auto"></p-button>
+    
+      <p-button label="التالية" icon="pi pi-chevron-left" iconPos="left" (onClick)="nextPage()" [disabled]="isLoading()"
+        severity="secondary" styleClass="w-full md:w-auto"></p-button>
+    
+      <p-button label="آية سابقة" icon="pi pi-chevron-right" (onClick)="revealPreviousAyah()" severity="secondary"
+        styleClass="w-full md:w-auto"></p-button>
+    
+      <p-button label="آية تالية" icon="pi pi-eye" (onClick)="revealNextAyah()" severity="secondary"
+        styleClass="w-full md:w-auto"></p-button>
+    </div>
 
       <div class="page-content">
         @for (ayah of ayahs(); track ayah.number; let i = $index; let isFirst = $first) {

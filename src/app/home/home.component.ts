@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   revealedAyahs = signal<number[]>([]);
 
   ngOnInit(): void {
-    this.loadPage(1);
+    this.loadPage(localStorage.getItem('lastPage') ? +localStorage.getItem('lastPage')! : 1);
   }
 
   loadPage(pageNumber: number): void {
@@ -50,11 +50,15 @@ export class HomeComponent implements OnInit {
 
   nextPage(): void {
     this.loadPage(this.pageNumber() + 1);
+    const nextPage = this.pageNumber() + 1;
+    localStorage.setItem('lastPage', nextPage.toString());
   }
 
   previousPage(): void {
     if (this.pageNumber() > 1) {
       this.loadPage(this.pageNumber() - 1);
+      const prevPage = this.pageNumber() - 1;
+      localStorage.setItem('lastPage', prevPage.toString());
     }
   }
 
@@ -62,6 +66,7 @@ export class HomeComponent implements OnInit {
     const page = this.pageNumberInput();
     if (page && page >= 1 && page <= 604) {
       this.loadPage(page);
+      localStorage.setItem('lastPage', page.toString());
     }
   }
 
