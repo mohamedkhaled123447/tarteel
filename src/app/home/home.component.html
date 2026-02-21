@@ -1,15 +1,5 @@
 <div class="moshaf-container">
   <p-toolbar styleClass="mb-4 header">
-    <ng-template #start>
-      <p-button
-        label="السابق"
-        icon="pi pi-chevron-right"
-        (onClick)="previousPage()"
-        [disabled]="pageNumber() === 1 || isLoading()"
-        severity="secondary"
-      />
-    </ng-template>
-
     <ng-template #center>
       <div class="page-input-container">
         <p-inputNumber
@@ -35,16 +25,6 @@
       </div>
     </ng-template>
 
-    <ng-template #end>
-      <p-button
-        label="التالي"
-        icon="pi pi-chevron-left"
-        iconPos="left"
-        (onClick)="nextPage()"
-        [disabled]="isLoading()"
-        severity="secondary"
-      />
-    </ng-template>
   </p-toolbar>
 
   @if (isLoading()) {
